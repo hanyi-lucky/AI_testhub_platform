@@ -1,0 +1,675 @@
+name: ui-component-pack
+version: 2026.02.02
+description: 导出的组件包
+author: ''
+components:
+- type: click
+  name: 点击
+  category: action
+  description: 点击指定元素或坐标
+  schema:
+    required:
+    - selector_type
+    - selector
+    properties:
+      timeout:
+        type: number
+      selector:
+        type: string
+      image_scope:
+        type: string
+      selector_type:
+        type: string
+      image_threshold:
+        type: number
+  default_config:
+    timeout: 5
+    selector: ''
+    image_scope: common
+    selector_type: image
+    image_threshold: 0.7
+  enabled: true
+  sort_order: 10
+- type: set_variable
+  name: 设置变量
+  category: utility
+  description: 设置运行时变量
+  schema:
+    required:
+    - name
+    - value
+    properties:
+      name:
+        type: string
+      scope:
+        type: string
+      value:
+        type: string
+      value_type:
+        type: string
+  default_config:
+    name: ''
+    scope: local
+    value: ''
+    value_type: string
+  enabled: true
+  sort_order: 10
+- type: input
+  name: 输入文本
+  category: action
+  description: 输入文本
+  schema:
+    required:
+    - selector_type
+    - selector
+    - value
+    properties:
+      value:
+        type: string
+      selector:
+        type: string
+      image_scope:
+        type: string
+      selector_type:
+        type: string
+      image_threshold:
+        type: number
+  default_config:
+    value: ''
+    selector: ''
+    image_scope: common
+    selector_type: image
+    image_threshold: 0.7
+  enabled: true
+  sort_order: 20
+- type: unset_variable
+  name: 删除变量
+  category: utility
+  description: 删除运行时变量
+  schema:
+    required:
+    - name
+    properties:
+      name:
+        type: string
+      scope:
+        type: string
+  default_config:
+    name: ''
+    scope: local
+  enabled: true
+  sort_order: 20
+- type: extract_output
+  name: 输出抽取
+  category: utility
+  description: 从输出中提取字段保存为变量
+  schema:
+    required:
+    - source
+    - path
+    - name
+    properties:
+      name:
+        type: string
+      path:
+        type: string
+      scope:
+        type: string
+      source:
+        type: string
+  default_config:
+    name: ''
+    path: ''
+    scope: local
+    source: outputs.last
+  enabled: true
+  sort_order: 30
+- type: swipe
+  name: 滑动
+  category: action
+  description: 方向滑动或坐标滑动
+  schema:
+    required:
+    - direction
+    properties:
+      duration:
+        type: number
+      selector:
+        type: string
+      direction:
+        type: string
+      image_scope:
+        type: string
+      selector_type:
+        type: string
+  default_config:
+    selector: ''
+    direction: up
+    image_scope: common
+    selector_type: pos
+  enabled: true
+  sort_order: 30
+- type: api_request
+  name: HTTP请求
+  category: action
+  description: 执行HTTP请求并支持提取结果
+  schema:
+    required:
+    - method
+    - url
+    properties:
+      url:
+        type: string
+      data:
+        type: object
+      json:
+        type: object
+      scope:
+        type: string
+      method:
+        type: string
+      params:
+        type: object
+      headers:
+        type: object
+      save_as:
+        type: string
+      timeout:
+        type: number
+      extracts:
+        type: array
+      response_type:
+        type: string
+      expected_status:
+        type: number
+  default_config:
+    url: ''
+    data: {}
+    json: {}
+    scope: local
+    method: GET
+    params: {}
+    headers: {}
+    save_as: ''
+    timeout: 10
+    extracts: []
+    response_type: auto
+  enabled: true
+  sort_order: 40
+- type: wait
+  name: 等待
+  category: control
+  description: 等待指定时间或等待元素出现
+  schema:
+    required:
+    - timeout
+    properties:
+      timeout:
+        type: number
+      selector:
+        type: string
+      image_scope:
+        type: string
+      selector_type:
+        type: string
+      image_threshold:
+        type: number
+  default_config:
+    timeout: 3
+    selector: ''
+    image_scope: common
+    selector_type: image
+    image_threshold: 0.7
+  enabled: true
+  sort_order: 40
+- type: image_exists_click
+  name: 图片存在点击
+  category: action
+  description: 主定位存在则点击主定位，否则点击备用定位
+  schema:
+    required:
+    - selector
+    - fallback_selector
+    properties:
+      selector_type:
+        type: string
+        enum:
+        - image
+        - pos
+        - region
+      selector:
+        type: string
+      image_scope:
+        type: string
+      image_threshold:
+        type: number
+      fallback_selector_type:
+        type: string
+        enum:
+        - image
+        - pos
+        - region
+      fallback_selector:
+        type: string
+      fallback_image_scope:
+        type: string
+      fallback_image_threshold:
+        type: number
+      timeout:
+        type: number
+  default_config:
+    selector_type: image
+    selector: ''
+    image_scope: common
+    image_threshold: 0.7
+    fallback_selector_type: image
+    fallback_selector: ''
+    fallback_image_scope: common
+    fallback_image_threshold: 0.7
+    timeout: 5
+  enabled: true
+  sort_order: 70
+- type: screenshot
+  name: 截图
+  category: utility
+  description: 截图保存
+  schema:
+    required: []
+    properties:
+      note:
+        type: string
+  default_config:
+    note: ''
+    selector: ''
+    selector_type: image
+  enabled: true
+  sort_order: 70
+- type: image_exists_click_chain
+  name: 图片存在依次点击
+  category: action
+  description: 主定位存在则点击主定位再点击备用定位，否则直接点击备用定位
+  schema:
+    required:
+    - selector
+    - fallback_selector
+    properties:
+      selector_type:
+        type: string
+        enum:
+        - image
+        - pos
+        - region
+      selector:
+        type: string
+      image_scope:
+        type: string
+      image_threshold:
+        type: number
+      fallback_selector_type:
+        type: string
+        enum:
+        - image
+        - pos
+        - region
+      fallback_selector:
+        type: string
+      fallback_image_scope:
+        type: string
+      fallback_image_threshold:
+        type: number
+      timeout:
+        type: number
+  default_config:
+    selector_type: image
+    selector: ''
+    image_scope: common
+    image_threshold: 0.7
+    fallback_selector_type: image
+    fallback_selector: ''
+    fallback_image_scope: common
+    fallback_image_threshold: 0.7
+    timeout: 5
+  enabled: true
+  sort_order: 72
+- type: long_press
+  name: 长按
+  category: action
+  description: 长按指定元素
+  schema:
+    required:
+    - selector_type
+    - selector
+    properties:
+      timeout:
+        type: number
+      duration:
+        type: number
+      selector:
+        type: string
+      image_scope:
+        type: string
+      selector_type:
+        type: string
+  default_config:
+    timeout: 5
+    duration: 2
+    selector: ''
+    image_scope: common
+    selector_type: image
+  enabled: true
+  sort_order: 80
+- type: double_click
+  name: 双击
+  category: action
+  description: 双击指定元素
+  schema:
+    required:
+    - selector_type
+    - selector
+    properties:
+      timeout:
+        type: number
+      selector:
+        type: string
+      image_scope:
+        type: string
+      selector_type:
+        type: string
+  default_config:
+    timeout: 5
+    selector: ''
+    image_scope: common
+    selector_type: image
+  enabled: true
+  sort_order: 90
+- type: drag
+  name: 拖拽
+  category: action
+  description: 从起点拖拽到终点
+  schema:
+    required:
+    - start_selector_type
+    - start_selector
+    - end_selector_type
+    - end_selector
+    properties:
+      timeout:
+        type: number
+      duration:
+        type: number
+      image_scope:
+        type: string
+      end_selector:
+        type: string
+      start_selector:
+        type: string
+      end_selector_type:
+        type: string
+      start_selector_type:
+        type: string
+  default_config:
+    timeout: 5
+    duration: 0.8
+    image_scope: common
+    end_selector: ''
+    start_selector: ''
+    end_selector_type: image
+    start_selector_type: image
+  enabled: true
+  sort_order: 100
+- type: swipe_to
+  name: 滑动到元素
+  category: action
+  description: 滑动直到目标元素出现
+  schema:
+    required:
+    - target_selector_type
+    - target_selector
+    properties:
+      duration:
+        type: number
+      interval:
+        type: number
+      direction:
+        type: string
+      max_swipes:
+        type: number
+      image_scope:
+        type: string
+      target_selector:
+        type: string
+      target_selector_type:
+        type: string
+  default_config:
+    duration: 0.5
+    interval: 0.5
+    direction: up
+    max_swipes: 5
+    image_scope: common
+    target_selector: ''
+    target_selector_type: image
+  enabled: true
+  sort_order: 110
+- type: assert
+  name: 断言
+  category: assert
+  description: 支持文本/数值/正则/范围/存在性/图片6种断言
+  schema:
+    required:
+    - assert_type
+    properties:
+      assert_type:
+        type: string
+      selector_type:
+        type: string
+      selector:
+        type: string
+      expected:
+        type: string
+      match_mode:
+        type: string
+      min:
+        type: number
+      max:
+        type: number
+      expected_exists:
+        type: boolean
+      image_scope:
+        type: string
+      expected_image_scope:
+        type: string
+      image_threshold:
+        type: number
+      ocr_selector_type:
+        type: string
+      ocr_selector:
+        type: string
+  default_config:
+    assert_type: text
+    selector_type: region
+    selector: ''
+    expected: ''
+    match_mode: contains
+    image_scope: common
+    expected_image_scope: common
+    image_threshold: 0.7
+  enabled: true
+  sort_order: 50
+- type: foreach_assert
+  name: 循环点击断言
+  category: assert
+  description: 支持期望列表，循环点击并断言匹配（文本/数字/图片）
+  schema:
+    required:
+    - expected_list
+    - click_selector_type
+    - click_selector
+    - ocr_selector_type
+    - ocr_selector
+    properties:
+      timeout:
+        type: number
+      interval:
+        type: number
+      max_loops:
+        type: number
+      match_mode:
+        type: string
+      assert_type:
+        type: string
+      image_scope:
+        type: string
+      ocr_selector:
+        type: string
+      expected_list:
+        type: array
+      click_selector:
+        type: string
+      image_threshold:
+        type: number
+      ocr_selector_type:
+        type: string
+      click_selector_type:
+        type: string
+      expected_image_scope:
+        type: string
+  default_config:
+    timeout: 5
+    interval: 0.5
+    max_loops: 5
+    match_mode: contains
+    assert_type: text
+    image_scope: common
+    ocr_selector: ''
+    expected_list: []
+    click_selector: ''
+    image_threshold: 0.7
+    ocr_selector_type: region
+    click_selector_type: image
+    expected_image_scope: common
+  enabled: true
+  sort_order: 125
+- type: if
+  name: 条件分支
+  category: control
+  description: 根据条件执行分支
+  schema:
+    required:
+    - left
+    - operator
+    - then_steps
+    properties:
+      left:
+        type: string
+      right:
+        type: string
+      operator:
+        type: string
+        enum:
+        - ==
+        - '!='
+        - '>'
+        - '>='
+        - <
+        - <=
+        - in
+        - not in
+        - contains
+        - not_contains
+        - regex
+        - truthy
+        - falsy
+        - startswith
+        - endswith
+      else_steps:
+        type: array
+      then_steps:
+        type: array
+  default_config:
+    left: ''
+    right: ''
+    operator: ==
+    else_steps: []
+    then_steps: []
+  enabled: true
+  sort_order: 130
+- type: loop
+  name: 循环
+  category: control
+  description: 计数/条件/遍历循环
+  schema:
+    required:
+    - steps
+    properties:
+      left:
+        type: string
+      mode:
+        type: string
+      items:
+        type: array
+      right:
+        type: string
+      steps:
+        type: array
+      times:
+        type: number
+      interval:
+        type: number
+      item_var:
+        type: string
+      operator:
+        type: string
+      max_loops:
+        type: number
+      item_scope:
+        type: string
+  default_config:
+    mode: count
+    steps: []
+    times: 1
+    interval: 0
+    item_var: item
+    max_loops: 10
+    item_scope: local
+  enabled: true
+  sort_order: 140
+- type: sequence
+  name: 顺序执行
+  category: control
+  description: 顺序执行子步骤
+  schema:
+    required:
+    - steps
+    properties:
+      steps:
+        type: array
+  default_config:
+    steps: []
+  enabled: true
+  sort_order: 150
+- type: try
+  name: 异常处理
+  category: control
+  description: try/catch/finally 控制
+  schema:
+    required:
+    - try_steps
+    properties:
+      error_var:
+        type: string
+      try_steps:
+        type: array
+      catch_steps:
+        type: array
+      error_scope:
+        type: string
+      finally_steps:
+        type: array
+  default_config:
+    error_var: error
+    try_steps: []
+    catch_steps: []
+    error_scope: local
+    finally_steps: []
+  enabled: true
+  sort_order: 170
