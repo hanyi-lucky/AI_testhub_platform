@@ -30,7 +30,6 @@ def get_adb_path() -> str:
         logger.warning(f"获取 ADB 配置失败，使用默认路径: {e}")
         return 'adb'
 
-
 class AppDeviceViewSet(viewsets.ModelViewSet):
     """APP设备管理 ViewSet"""
     queryset = AppDevice.objects.all()

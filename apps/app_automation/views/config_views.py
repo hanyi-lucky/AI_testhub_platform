@@ -69,3 +69,4 @@ class AppConfigViewSet(viewsets.ViewSet):
                 'success': False,
                 'message': f'更新配置失败: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

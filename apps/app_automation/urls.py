@@ -43,3 +43,4 @@ urlpatterns = [
     path('executions/<int:execution_id>/report/', serve_report_file, name='app-execution-report'),
     path('executions/<int:execution_id>/report/<path:file_path>', serve_report_file, name='app-execution-report-file'),
 ]
+
