@@ -71,3 +71,4 @@ docker-compose*.yml
 nginx.conf
 Makefile
 build-multiplatform.sh
+TestHub学习指南.html

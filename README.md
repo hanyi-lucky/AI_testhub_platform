@@ -7,13 +7,14 @@
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-4.2-green.svg)](https://www.djangoproject.com/)
 [![Vue](https://img.shields.io/badge/Vue-3.3-brightgreen.svg)](https://vuejs.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Vite](https://img.shields.io/badge/Vite-7-orange.svg)](https://vitejs.dev/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-ff6f00.svg)](https://www.mysql.com/)
 
 </div>
 
 ## 📖 项目简介
 
-TestHub 是一个功能强大的智能测试管理平台，集成了 **AI 需求分析**、**测试用例管理**、**API 测试**、**UI 自动化测试** 等多个模块，旨在提升测试效率和质量。平台采用 Django + Vue3 技术栈，提供现代化的用户界面和丰富的功能特性。
+TestHub 是一个功能强大的智能测试管理平台，集成了 **AI 需求分析**、**测试用例管理**、**API 测试**、**UI 自动化测试**、**APP 自动化测试**、**数据工厂** 等多个模块，旨在提升测试效率和质量。平台采用 Django + Vue3 技术栈，提供现代化的用户界面和丰富的功能特性，支持中英文双语国际化。
 
 ## ✨ 核心特性
 
@@ -21,8 +22,13 @@ TestHub 是一个功能强大的智能测试管理平台，集成了 **AI 需求
 - **AI 需求分析**: 自动解析需求文档（PDF/Word/TXT），智能提取业务需求
 - **智能测试用例生成**: 基于需求自动生成测试用例，支持多种测试类型
 - **智能助手**: 集成 Dify AI 助手，提供测试咨询和问题解答
-- **多模型支持**: 支持 DeepSeek、通义千问、硅基流动等多种 AI 模型
+- **多模型支持**: 支持 DeepSeek、通义千问、硅基流动、OpenAI 兼容接口等多种 AI 模型
 - **AI 智能模式**: 基于 Browser-use 的智能浏览器自动化，AI 理解页面并自动完成测试
+
+### 🌍 国际化支持
+- **中英文双语**: 基于 vue-i18n 的完整国际化方案，覆盖全部功能模块
+- **按需切换**: 支持语言偏好持久化，用户可随时切换界面语言
+- **格式化**: 内置日期时间、数字、复数规则的多语言格式化
 
 ### 🔐 安全机制
 - **JWT 认证**: 采用企业级 JWT 双 Token 安全机制
@@ -31,9 +37,9 @@ TestHub 是一个功能强大的智能测试管理平台，集成了 **AI 需求
 - **请求队列**: Token 刷新期间请求自动排队等待，确保请求不丢失
 
 ### ⚙️ 统一配置中心
-- **环境检测**: 自动检测系统浏览器和 Playwright 环境
+- **环境检测**: 自动检测系统浏览器、Playwright 及 APP 自动化环境
 - **驱动管理**: 一键安装和更新浏览器驱动
-- **AI 模型配置**: 统一管理多种 AI 模型的 API 配置
+- **AI 模型配置**: 统一管理多种 AI 模型的 API 配置，按角色分配
 - **连接测试**: 支持 AI 模型连接测试和验证
 
 ### 📋 测试用例管理
@@ -72,25 +78,25 @@ TestHub 是一个功能强大的智能测试管理平台，集成了 **AI 需求
   - 支持多种 AI 模型：OpenAI、Anthropic、Google Gemini、DeepSeek、硅基流动等
   - 智能任务规划和步骤自动生成
 
-### 📱 APP 自动化测试（Android）**新增** ✅ **【已完整实现】**
+### 📱 APP 自动化测试（Android）
 - **Airtest 框架**: 基于图像识别的 Android APP 自动化测试
 - **设备管理**: 支持本地模拟器和远程设备，设备资源池管理
 - **设备锁定**: 多用户环境下的设备锁定机制，避免资源冲突
 - **ADB 集成**: 自动发现设备、连接远程设备、设备信息查询
-- **元素管理**: 支持图片元素、坐标元素、区域元素三种定位方式
+- **元素管理**: 支持图片元素、坐标元素、区域元素三种定位方式，支持 OCR 识别
 - **多分辨率适配**: 不同分辨率下的元素配置管理
 - **组件化编排**: 基础组件定义、自定义组件组合、组件包导入导出
-- **UI Flow**: JSON 格式的 UI 流程编排，支持10+ Airtest动作
-- **变量管理**: 支持 global/local/outputs 作用域，{{variable}} 语法
-- **测试执行**: Celery异步执行 + pytest + Allure 报告生成
+- **UI Flow**: JSON 格式的 UI 流程编排，支持 10+ Airtest 动作
+- **变量管理**: 支持 global/local/outputs 作用域，`{{variable}}` 语法
+- **测试执行**: Celery 异步执行 + pytest + Allure 报告生成
 - **执行引擎**: AirtestBase + UiFlowRunner + AppTestExecutor 完整实现
-- **进度追踪**: 实时执行进度、步骤统计、通过率计算
-- **使用统计**: 元素使用次数追踪，优化元素管理
+- **实时进度**: 基于 WebSocket 的执行进度实时推送，步骤统计与通过率计算
+- **场景编排**: 可视化场景编排器（Scene Builder），拖拽式流程设计
+- **定时任务**: 支持定时执行测试套件，执行结果通知
 - **API 完整**: 40+ RESTful API 接口，支持所有功能操作
-- **前端页面**: 7个完整页面（Dashboard/设备/元素/用例/执行记录）
+- **前端页面**: Dashboard/项目/设备/安装包/元素/场景/用例/套件/执行记录等完整页面
 - **代码编辑器**: Monaco Editor 集成，支持 JSON 语法高亮
 - **图片上传**: 支持元素图片拖拽上传和预览
-- **实时更新**: 执行记录自动刷新，实时进度展示
 
 ### 📊 测试执行与报告
 - **测试计划**: 创建测试计划，关联项目、版本和测试用例
@@ -125,24 +131,27 @@ TestHub 是一个功能强大的智能测试管理平台，集成了 **AI 需求
 - **数据库**: MySQL 8.0+ (PyMySQL)
 - **API 文档**: drf-spectacular (Swagger/ReDoc)
 - **安全认证**: JWT (rest_framework_simplejwt) + Token 黑名单
+- **实时通信**: Django Channels + Daphne (WebSocket，用于 APP 自动化执行进度推送)
+- **任务处理**: Celery + Redis (APP 自动化异步执行)
+- **定时任务**: 自研统一调度器 (`run_all_scheduled_tasks`，同时调度 API/UI/APP 模块)
 - **AI 集成**:
   - browser-use: AI 驱动的浏览器自动化
   - langchain-openai: LLM 集成框架
-  - 多模型支持：OpenAI、Anthropic、Google Gemini、DeepSeek、硅基流动等
-- **自动化测试**: Selenium, Playwright, Allure
+  - 多模型支持：OpenAI、Anthropic、Google Gemini、DeepSeek、通义千问、硅基流动等
+- **自动化测试**: Selenium, Playwright, Airtest, Allure
 - **HTTP 客户端**: httpx (异步 HTTP)
-- **定时任务**: Django APScheduler
 
 ### 前端技术栈
 - **框架**: Vue 3.3 + Composition API
-- **构建工具**: Vite 4.4
+- **构建工具**: Vite 7
 - **UI 组件**: Element Plus 2.3
 - **状态管理**: Pinia 2.1
 - **路由**: Vue Router 4.2
+- **国际化**: vue-i18n 9（中英文双语）
 - **HTTP 客户端**: Axios 1.5
 - **数据可视化**: ECharts 5.4
 - **代码编辑器**: Monaco Editor
-- **其他**: vuedraggable (拖拽), xlsx (Excel), dayjs (日期)
+- **其他**: vuedraggable (拖拽), xlsx (Excel), dayjs (日期), curlconverter (cURL 转换)
 
 ## 📁 项目结构
 
@@ -154,21 +163,31 @@ testhub_platform/
 │   ├── testcases/                  # 测试用例管理
 │   ├── testsuites/                 # 测试套件管理
 │   ├── executions/                 # 测试执行管理
-│   ├── data_factory/               # 数据工厂
 │   ├── reports/                    # 测试报告
 │   ├── reviews/                    # 用例评审管理
 │   ├── versions/                   # 版本管理
+│   ├── data_factory/               # 数据工厂
 │   ├── core/                       # 核心功能模块
 │   │   ├── models.py               # 统一通知配置模型
 │   │   ├── views.py                # 核心功能视图
 │   │   └── management/commands/     # 管理命令
 │   │       ├── run_all_scheduled_tasks.py  # 统一定时任务调度器
 │   │       ├── init_locator_strategies.py  # 初始化元素定位策略
+│   │       ├── load_component_pack.py      # 初始化APP自动化组件库
 │   │       └── download_webdrivers.py      # 下载浏览器驱动
 │   ├── requirement_analysis/       # AI 需求分析
 │   ├── assistant/                  # 智能助手
 │   ├── api_testing/                # API 测试
-│   └── ui_automation/              # UI 自动化测试
+│   ├── ui_automation/              # UI 自动化测试
+│   ├── app_automation/             # APP 自动化测试（Android/Airtest）
+│   │   ├── views/                  # 设备/元素/组件/用例/套件/执行等视图
+│   │   ├── runners/                # UI Flow 执行器
+│   │   ├── executors/              # 测试执行器
+│   │   ├── managers/               # 设备管理（ADB）
+│   │   ├── utils/                  # Airtest 封装、图片/OCR 工具
+│   │   ├── consumers.py            # WebSocket 实时进度推送
+│   │   └── tasks.py                # Celery 异步执行任务
+│   └── ...
 ├── backend/                        # Django 项目配置
 │   ├── settings.py                 # 项目设置
 │   ├── urls.py                     # URL 路由
@@ -177,10 +196,15 @@ testhub_platform/
 │   ├── src/
 │   │   ├── api/                    # API 接口
 │   │   ├── components/             # 公共组件
+│   │   ├── locales/                # 国际化语言包（zh-cn / en）
 │   │   ├── views/                  # 页面视图
 │   │   │   ├── auth/               # 登录注册
 │   │   │   ├── projects/           # 项目管理
 │   │   │   ├── testcases/          # 测试用例
+│   │   │   ├── testsuites/         # 测试套件
+│   │   │   ├── executions/         # 测试执行
+│   │   │   ├── reports/            # 测试报告
+│   │   │   ├── versions/           # 版本管理
 │   │   │   ├── data-factory/       # 数据工厂
 │   │   │   ├── reviews/            # 用例评审
 │   │   │   ├── requirement-analysis/  # 需求分析
@@ -190,12 +214,16 @@ testhub_platform/
 │   │   │   │   ├── ai/             # AI 智能模式
 │   │   │   │   ├── config/         # 配置管理
 │   │   │   │   └── suites/         # 测试套件
+│   │   │   ├── app-automation/     # APP 自动化
+│   │   │   ├── notification/       # 通知中心
+│   │   │   ├── profile/            # 个人中心
 │   │   │   └── configuration/      # 统一配置中心
 │   │   ├── stores/                 # Pinia 状态管理
 │   │   ├── router/                 # 路由配置
 │   │   ├── utils/                  # 工具函数
 │   │   └── assets/                 # 静态资源
 │   └── package.json
+├── docs/                           # 项目文档
 ├── media/                          # 媒体文件（上传文件、截图等）
 ├── logs/                           # 日志文件
 │   └── scheduler.log              # 统一调度器日志
@@ -208,18 +236,18 @@ testhub_platform/
 
 ### 环境要求
 
-- **Python**: 推荐Python3.12,其他版本可能会存在兼容性问题
-- **Node.js**: 18+(开发环境必须安装Node.js用于构建前端项目,生产可不安装)
-- **MySQL**: 8.0+(必须安装MySQL客户端，用于执行数据库迁移等操作)
-- **Java**: 17+ (可选,用于运行浏览器驱动、Allure 报告生成等，否则会生成报告失败)
-- **Redis**: 6.0+ (可选,用于APP自动化测试相关)
-- **浏览器驱动**: ChromeDriver / GeckoDriver (用于 UI 自动化,建议提前下载好)
+- **Python**: 推荐 Python3.12，其他版本可能会存在兼容性问题
+- **Node.js**: 18+（开发环境必须安装 Node.js 用于构建前端项目，生产可不安装）
+- **MySQL**: 8.0+（必须安装 MySQL 客户端，用于执行数据库迁移等操作）
+- **Java**: 17+（可选，用于运行浏览器驱动、Allure 报告生成等，否则会生成报告失败）
+- **Redis**: 6.0+（可选，用于 APP 自动化测试异步执行）
+- **浏览器驱动**: ChromeDriver / GeckoDriver (用于 UI 自动化，建议提前下载好)
 
 ### 后端部署
 
 1. **克隆项目**
 ```bash
-git clone <repository-url>
+git clone https://github.com/hanyi-lucky/AI_testhub_platform.git
 cd testhub_platform
 ```
 
@@ -263,12 +291,13 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-6. **初始化UI自动化测试定位策略**
+6. **初始化 UI 自动化测试定位策略**
 ```bash
 # 根目录执行
 python manage.py init_locator_strategies
 ```
-7. **初始化app自动化组件库**
+
+7. **初始化 APP 自动化组件库**
 ```bash
 # 根目录执行
 python manage.py load_component_pack
@@ -276,7 +305,7 @@ python manage.py load_component_pack
 
 8. **启动定时任务**
 ```bash
-# 启动统一任务调度器(同时管理API和UI模块)
+# 启动统一任务调度器（同时管理 API、UI、APP 模块）
 python manage.py run_all_scheduled_tasks
 ```
 
@@ -285,9 +314,10 @@ python manage.py run_all_scheduled_tasks
 # 启动 Django 开发服务器
 python manage.py runserver
 ```
-10. **启动Celery服务**
+
+10. **启动 Celery 服务**
 ```bash
-# 启动 Celery 开发服务(可选，用于处理APP自动化任务)
+# 启动 Celery 开发服务（可选，用于处理APP自动化任务）
 celery -A backend worker -l info
 ```
 
@@ -332,7 +362,6 @@ npm run build
 
 ## 📄 文档
 
-- **[更新日志 (CHANGELOG)](./docs/CHANGELOG.md)**: 查看版本更新历史和重要变更
 - **[数据工厂使用说明](./docs/数据工厂使用说明.md)**: 数据工厂功能完整介绍和使用技巧
 - **[数据工厂快速开始](./docs/数据工厂快速开始.md)**: 数据工厂快速上手指南
 - **[数据工厂功能说明](./docs/数据工厂功能说明.md)**: 数据工厂功能详细说明
@@ -340,6 +369,7 @@ npm run build
 - **[UI自动化测试执行说明](./docs/UI自动化测试执行说明.md)**: UI 自动化测试执行指南
 - **[WebDriver驱动管理优化说明](./docs/WebDriver驱动管理优化说明.md)**: WebDriver 驱动管理优化说明
 - **[用例评审管理功能说明](./docs/用例评审管理功能说明.md)**: 用例评审管理功能说明
+- **[I18N国际化使用说明](./docs/I18N国际化使用说明.md)**: 中英文国际化方案与使用说明
 - **[问题排查指南](./docs/问题排查指南.md)**: 常见问题排查指南
 
 ## 📚 核心功能模块说明
@@ -351,7 +381,7 @@ npm run build
 
 **管理命令**:
 - `run_all_scheduled_tasks`: 统一定时任务调度器
-  - 同时调度 API 测试和 UI 自动化模块的定时任务
+  - 同时调度 API 测试、UI 自动化和 APP 自动化模块的定时任务
   - 支持自定义检查间隔（默认60秒）
   - 支持单次执行模式（`--once`）
   - 详细日志输出，便于调试和监控
@@ -360,6 +390,9 @@ npm run build
   - 创建/更新12种常用元素定位策略
   - 通用策略：ID, CSS, XPath, name, class, tag
   - Playwright 专用策略：text, placeholder, role, label, title, test-id
+
+- `load_component_pack`: 初始化APP自动化组件库
+  - 加载内置基础组件包，供组件化编排使用
 
 - `download_webdrivers`: 下载浏览器驱动
   - 支持 Chrome (ChromeDriver)
@@ -371,7 +404,7 @@ npm run build
 - `UnifiedNotificationConfig`: 统一通知配置
   - 支持企业微信、钉钉、飞书等多种 Webhook 机器人
   - 每个机器人可独立配置启用状态
-  - 支持 API 测试和 UI 自动化测试模块独立开关
+  - 支持 API 测试、UI 自动化和 APP 自动化模块独立开关
   - JSON 格式存储多个机器人配置
 
 **API 路由**:
@@ -399,8 +432,8 @@ npm run build
 
 ### 3. 智能助手模块 (`assistant`)
 
-- 集成 Dify AI 助手
 **功能**:
+- 集成 Dify AI 助手
 - 多会话管理
 - 聊天历史记录
 - 测试咨询和问题解答
@@ -431,7 +464,7 @@ npm run build
 - `ApiScheduledTask`: 定时任务
 - `ApiNotificationConfig`: 通知配置
 
-### 4.5. 数据工厂模块 (`data_factory`)
+### 5. 数据工厂模块 (`data_factory`)
 
 **功能**:
 - **字符工具**（9个功能）: 去除空格换行、字符串替换、转义反转义、字数统计、文本对比、正则测试、大小写转换、字符串格式化
@@ -471,9 +504,9 @@ npm run build
 - `/api/data-factory/execute/`: 执行工具
 - `/api/data-factory/download_static_file/{filename}/`: 下载生成的文件（条形码、二维码等）
 
-**详细使用说明**: 请查看 [数据工厂使用说明.md](./数据工厂使用说明.md) 获取完整的功能介绍、使用技巧和最佳实践。
+**详细使用说明**: 请查看 [数据工厂使用说明.md](./docs/数据工厂使用说明.md) 获取完整的功能介绍、使用技巧和最佳实践。
 
-### 5. UI 自动化测试模块 (`ui_automation`)
+### 6. UI 自动化测试模块 (`ui_automation`)
 
 **功能**:
 - 元素库管理（支持多种定位策略）
@@ -508,22 +541,53 @@ npm run build
 - `AICase`: AI 智能用例
 - `AIIntelligentModeConfig`: AI 智能模式配置
 
-### 6. 统一配置中心模块 (`configuration`)
+### 7. APP 自动化测试模块 (`app_automation`)
 
 **功能**:
-- **环境检测**: 自动检测系统已安装的浏览器
+- 项目与测试配置管理
+- 设备管理（本地/远程 ADB 设备、设备锁定、资源池）
+- 元素管理（图片/坐标/区域元素、多分辨率、OCR 辅助）
+- 组件化编排（基础组件、自定义组件、组件包导入导出）
+- UI Flow 场景编排与执行（JSON 流程 + 可视化 Scene Builder）
+- 测试用例、测试套件管理
+- Celery 异步执行 + pytest + Allure 报告
+- WebSocket 实时进度推送
+- 定时任务与执行通知
+
+**核心组件**:
+- `utils/airtest_base.py`: Airtest 能力封装基类
+- `runners/ui_flow_runner.py`: UI Flow 执行器
+- `executors/test_executor.py`: 测试执行器
+- `managers/device_manager.py`: ADB 设备管理
+- `consumers.py`: WebSocket 进度推送
+- `tasks.py`: Celery 异步任务
+
+**API 路由**:
+- `/api/app-automation/`: APP 自动化全量接口（项目/设备/元素/组件/用例/套件/执行/定时任务等）
+
+**数据模型**:
+- `AppProject`, `AppTestConfig`, `AppDevice`
+- `AppElement`, `AppComponent`, `AppCustomComponent`, `AppComponentPackage`
+- `AppPackage`, `AppTestSuite`, `AppTestSuiteCase`, `AppTestCase`
+- `AppTestExecution`, `AppScheduledTask`, `AppNotificationLog`
+
+### 8. 统一配置中心模块 (`configuration`)
+
+**功能**:
+- **环境检测**: 自动检测系统已安装的浏览器、UI/APP 自动化环境
 - **驱动管理**: 一键安装 Playwright 浏览器驱动
 - **AI 模型配置**:
   - 支持多种 AI 提供商：通义千问、DeepSeek、硅基流动、本地模型
   - 按角色配置：测试用例编写器、测试用例评审员、Browser Use 文本模式
   - API 密钥、基础 URL、模型名称、参数配置
   - 连接测试功能
+- **提示词与生成配置**: 自定义测试用例生成提示词和生成参数
 
 **API 路由**:
 - `/api/ui-automation/config/environment/`: 环境配置
 - `/api/ui-automation/config/ai-mode/`: AI 智能模式配置
 
-### 7. 测试用例评审模块 (`reviews`)
+### 9. 测试用例评审模块 (`reviews`)
 
 **功能**:
 - 创建评审任务
@@ -538,7 +602,7 @@ npm run build
 - `TestCaseReviewComment`: 评审意见
 - `ReviewTemplate`: 评审模板
 
-### 8. 测试执行模块 (`executions`)
+### 10. 测试执行模块 (`executions`)
 
 **功能**:
 - 测试计划管理
@@ -593,13 +657,14 @@ SIMPLE_JWT = {
 - **Anthropic**: Claude 系列模型
 - **Google Gemini**: Gemini Pro、Gemini Flash
 - **DeepSeek**: DeepSeek 系列模型
+- **通义千问**: 阿里云通义千问系列模型
 - **硅基流动**: 聚合多种 AI 模型
 
 **配置角色**:
 - `testcase_writer`: 测试用例编写
 - `testcase_reviewer`: 测试用例评审
 - `browser_use_text`: Browser Use 文本模式（DOM 解析）
-- `browser_use_vision`: Browser Use 视觉模式（截图识别）- 暂未实现
+- `browser_use_vision`: Browser Use 视觉模式（截图识别）
 
 **配置参数**:
 - API Key: API 访问密钥
@@ -637,10 +702,22 @@ SIMPLE_JWT = {
   - 文本模式：基于 DOM 解析，快速高效
   - 视觉模式：基于截图识别，适合复杂页面
 
+### APP 自动化配置
+
+- **执行环境**: ADB 路径配置、本地模拟器 / 远程设备连接
+- **执行方式**: Celery 异步执行，Redis 作为消息代理
+- **报告**: pytest + Allure 报告生成（需 Java 17+）
+
 ### 通知配置
 
 - **邮件通知**: SMTP 配置
-- **Webhook 通知**: 企业微信、钉钉等
+- **Webhook 通知**: 企业微信、钉钉、飞书等，支持按模块独立开关
+
+### 国际化配置
+
+- 语言包位于 `frontend/src/locales/lang/`（`zh-cn` / `en`）
+- 支持语言偏好持久化与运行时切换
+- 详见 [I18N国际化使用说明](./docs/I18N国际化使用说明.md)
 
 ## 📊 数据库设计
 
@@ -658,5 +735,6 @@ SIMPLE_JWT = {
 - **智能助手**: `dify_configs`, `assistant_sessions`, `chat_messages`
 - **API 测试**: `api_projects`, `api_collections`, `api_requests`, `api_environments`, `test_suites`, `request_history`, `api_scheduled_tasks`
 - **UI 自动化**: `ui_projects`, `ui_elements`, `element_groups`, `ui_page_objects`, `ui_test_scripts`, `ui_test_cases`, `ui_test_suites`, `ui_test_executions`, `ui_scheduled_tasks`, `ai_cases`, `ai_intelligent_mode_configs`
+- **APP 自动化**: `app_projects`, `app_test_config`, `app_devices`, `app_elements`, `app_components`, `app_custom_components`, `app_component_packages`, `app_packages`, `app_test_suites`, `app_test_suite_cases`, `app_test_cases`, `app_test_executions`, `app_scheduled_tasks`, `app_notification_logs`
 - **数据工厂**: `data_factory_record` - 工具使用记录表
 - **JWT 安全**: `blacklisted_token`, `outstanding_token` - Token 黑名单管理
